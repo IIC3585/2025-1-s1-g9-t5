@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MovieCarousel from '../../components/islands/MovieCarousel.vue';
+import * as moviesService from '../../services/movies';
+
+export async function getStaticPaths() {
+  const genres = await moviesService.getGenres();
+  return genres.map((genre) => ({
+    params: { id: genre.id.toString() },
+    props: { genre },
+  }));
+}
+
+const { genre } = Astro.props;
+const movies = await moviesService.getMoviesByGenre(genre.id);
+---
+
+<Layout title={`${genre.name} Movies - MovieFan`}>
+  <main class="min-h-screen pt-24">
+    <section class="py-12 bg-[#141414]">
+      <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold text-white mb-8">
+          {genre.name} Movies
+        </h1>
+        
+        {movies.length > 0 ? (
+          <MovieCarousel movies={movies} title={`${genre.name} Movies`} />
+        ) : (
+          <div class="text-center text-gray-400">
+            No movies found in this genre.
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+</Layout> 

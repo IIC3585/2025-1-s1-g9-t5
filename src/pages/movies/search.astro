@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MovieCarousel from '../../components/islands/MovieCarousel.vue';
+import * as moviesService from '../../services/movies';
+
+const { q } = Astro.url.searchParams;
+const searchResults = q ? await moviesService.searchMovies(q) : [];
+---
+
+<Layout title={`Search Results for "${q}" - MovieFan`}>
+  <main class="min-h-screen pt-24">
+    <section class="py-12 bg-[#141414]">
+      <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold text-white mb-8">
+          {q ? `Search Results for "${q}"` : 'Search Movies'}
+        </h1>
+        
+        {searchResults.length > 0 ? (
+          <MovieCarousel movies={searchResults} title="Search Results" />
+        ) : (
+          <div class="text-center text-gray-400">
+            {q ? 'No movies found. Try a different search term.' : 'Enter a search term to find movies.'}
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+</Layout> 

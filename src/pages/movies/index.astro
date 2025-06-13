@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MovieCarousel from '../../components/islands/MovieCarousel.vue';
+import * as moviesService from '../../services/movies';
+
+const popularMovies = await moviesService.getPopularMovies();
+const topRatedMovies = await moviesService.getTopRatedMovies();
+const upcomingMovies = await moviesService.getUpcomingMovies();
+---
+
+<Layout title="Descubre Películas">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-white mb-8">Descubre Películas</h1>
+    
+    <div class="mb-8">
+      <div class="relative">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Buscar películas..."
+          class="w-full px-4 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <div id="search-results" class="absolute z-10 w-full mt-2 bg-gray-800 rounded-lg shadow-lg hidden">
+          <!-- Los resultados se cargarán dinámicamente -->
+        </div>
+      </div>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-white mb-6">Películas Populares</h2>
+      <MovieCarousel movies={popularMovies} />
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-white mb-6">Mejor Calificadas</h2>
+      <MovieCarousel movies={topRatedMovies} />
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-white mb-6">Próximos Estrenos</h2>
+      <MovieCarousel movies={upcomingMovies} />
+    </section>
+  </main>
+</Layout>
+
+<script>
+  import * as moviesService from '../../services/movies';
+
+  let searchTimeout: number | null = null;
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const searchResults = document.getElementById('search-results');
+
+  if (searchInput && searchResults) {
+    searchInput.addEventListener('input', async (e) => {
+      const query = (e.target as HTMLInputElement).value.trim();
+      
+      // Limpiar el timeout anterior si existe
+      if (searchTimeout) {
+        clearTimeout(searchTimeout);
+      }
+
+      // Si la búsqueda está vacía, ocultar resultados
+      if (!query) {
+        searchResults.classList.add('hidden');
+        return;
+      }
+
+      // Esperar 300ms después de que el usuario deje de escribir
+      searchTimeout = setTimeout(async () => {
+        try {
+          const results = await moviesService.searchMovies(query);
+          
+          if (results.results.length === 0) {
+            searchResults.innerHTML = `
+              <div class="p-4 text-gray-400">
+                No se encontraron películas para "${query}"
+              </div>
+            `;
+          } else {
+            searchResults.innerHTML = results.results.map(movie => `
+              <a href="/movies/${movie.id}" class="block p-4 hover:bg-gray-700 transition-colors">
+                <div class="flex items-center space-x-4">
+                  <img
+                    src="https://image.tmdb.org/t/p/w92${movie.poster_path}"
+                    alt="${movie.title}"
+                    class="w-12 h-18 object-cover rounded"
+                  />
+                  <div>
+                    <h3 class="text-white font-medium">${movie.title}</h3>
+                    <p class="text-sm text-gray-400">${movie.release_date ? new Date(movie.release_date).getFullYear() : 'Sin fecha'}</p>
+                    <div class="flex items-center mt-1">
+                      <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="ml-1 text-sm text-gray-400">${movie.vote_average.toFixed(1)}/10</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            `).join('');
+          }
+          
+          searchResults.classList.remove('hidden');
+        } catch (error) {
+          console.error('Error al buscar películas:', error);
+          searchResults.innerHTML = `
+            <div class="p-4 text-red-400">
+              Error al buscar películas. Por favor, intenta de nuevo.
+            </div>
+          `;
+          searchResults.classList.remove('hidden');
+        }
+      }, 300);
+    });
+
+    // Cerrar resultados al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target as Node) && !searchResults.contains(e.target as Node)) {
+        searchResults.classList.add('hidden');
+      }
+    });
+  }
+</script> 

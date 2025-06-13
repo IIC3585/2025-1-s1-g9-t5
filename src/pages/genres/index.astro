@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import * as moviesService from '../../services/movies';
+
+const genres = await moviesService.getGenres();
+---
+
+<Layout title="Movie Genres - MovieFan">
+  <main class="min-h-screen pt-24">
+    <section class="py-12 bg-[#141414]">
+      <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold text-white mb-8 text-center">Movie Genres</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {genres.map((genre) => (
+            <a
+              href={`/genres/${genre.id}`}
+              class="genre-card group"
+            >
+              <div class="genre-content">
+                <h2 class="genre-title">{genre.name}</h2>
+                <p class="genre-description">
+                  Explore our collection of {genre.name.toLowerCase()} movies
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .genre-card {
+    @apply bg-[#1a1a1a] rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105;
+  }
+
+  .genre-content {
+    @apply p-6;
+  }
+
+  .genre-title {
+    @apply text-xl font-bold text-white mb-2;
+  }
+
+  .genre-description {
+    @apply text-gray-400;
+  }
+</style> 
