@@ -1,6 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getMovieDetails, getPosterUrl, getBackdropUrl } from '../../services/movies';
+import { getMovieDetails, getPosterUrl, getBackdropUrl, getPopularMovies } from '../../services/movies';
+
+export async function getStaticPaths() {
+  const popular = await getPopularMovies();
+
+  return popular.map((movie) => ({
+    params: { id: movie.id.toString() },
+  }));
+}
+
 
 const { id } = Astro.params;
 const movie = await getMovieDetails(Number(id));
