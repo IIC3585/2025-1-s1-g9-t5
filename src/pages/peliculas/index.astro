@@ -143,7 +143,7 @@ const [popularMovies, genres] = await Promise.all([
     if (moviesGrid) {
       moviesGrid.innerHTML = movies.map(movie => `
         <a
-          href="/peliculas/${movie.id}"
+          href="./peliculas/${movie.id}"
           class="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
         >
           <div class="relative aspect-[2/3]">
