@@ -9,6 +9,8 @@ Movie Database es una aplicación web estática desarrollada con Astro que permi
 - **MovieCarousel (Vue)**: Componente interactivo para mostrar películas en un carrusel deslizable
 - **MovieDetails (React)**: Componente para mostrar detalles de películas y gestionar calificaciones
 - **Directivas de Cliente**: Uso de `client:load` para componentes que requieren interactividad inmediata
+- **Directivas de Cliente**: Uso de `client:visible` para componentes que están más abajo en la página
+
 
 ### Generación Estática (SSG)
 - Páginas generadas estáticamente para:
@@ -83,13 +85,3 @@ src/
 3. **Interactividad**: Sistema de calificación y gestión de películas
 4. **Diseño Responsivo**: Interfaz adaptativa para diferentes dispositivos
 5. **Persistencia Local**: Almacenamiento de preferencias de usuario
-
-## Contribución
-1. Fork el repositorio
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
-
-## Licencia
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles. 

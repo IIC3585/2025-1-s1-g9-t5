@@ -43,7 +43,7 @@ const upcomingMovies = await moviesService.getUpcomingMovies();
     <section class="py-12 bg-[#141414]">
       <div class="container mx-auto px-4">
         <h2 class="text-2xl font-bold text-white mb-6">Trending Now</h2>
-        <MovieCarousel movies={trendingMovies} title="Trending Movies" />
+        <MovieCarousel client:load movies={trendingMovies} title="Trending Movies" />
       </div>
     </section>
 
@@ -51,7 +51,7 @@ const upcomingMovies = await moviesService.getUpcomingMovies();
     <section class="py-12 bg-[#1a1a1a]">
       <div class="container mx-auto px-4">
         <h2 class="text-2xl font-bold text-white mb-6">Popular Movies</h2>
-        <MovieCarousel movies={popularMovies} title="Popular Movies" />
+        <MovieCarousel client:visible movies={popularMovies} title="Popular Movies" />
       </div>
     </section>
 
@@ -59,7 +59,7 @@ const upcomingMovies = await moviesService.getUpcomingMovies();
     <section class="py-12 bg-[#141414]">
       <div class="container mx-auto px-4">
         <h2 class="text-2xl font-bold text-white mb-6">Top Rated</h2>
-        <MovieCarousel movies={topRatedMovies} title="Top Rated Movies" />
+        <MovieCarousel client:visible movies={topRatedMovies} title="Top Rated Movies" />
       </div>
     </section>
 
@@ -67,7 +67,7 @@ const upcomingMovies = await moviesService.getUpcomingMovies();
     <section class="py-12 bg-[#1a1a1a]">
       <div class="container mx-auto px-4">
         <h2 class="text-2xl font-bold text-white mb-6">Coming Soon</h2>
-        <MovieCarousel movies={upcomingMovies} title="Upcoming Movies" />
+        <MovieCarousel client:visible movies={upcomingMovies} title="Upcoming Movies" />
       </div>
     </section>
 
