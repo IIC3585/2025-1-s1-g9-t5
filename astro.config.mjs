@@ -6,7 +6,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [vue(), react(), tailwind()],
   output: 'static',
-  site: 'https://iic3585.github.io/2025-1-s1-g9-t5/',
+  site: 'https://moviefan.com',
   vite: {
     css: {
       preprocessorOptions: {
