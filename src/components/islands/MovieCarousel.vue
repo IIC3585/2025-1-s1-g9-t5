@@ -14,6 +14,7 @@ const isDragging = ref(false);
 const startX = ref(0);
 const scrollLeft = ref(0);
 const itemsPerPage = 5;
+const base = import.meta.env.BASE_URL;
 
 const next = () => {
   if (currentIndex.value < props.movies.length - itemsPerPage) {
@@ -81,7 +82,7 @@ onMounted(() => {
         :key="movie.id"
         class="movie-card flex-shrink-0"
       >
-        <a :href="`/movies/${movie.id}`" class="block group">
+        <a :href="`${base}movies/${movie.id}`" class="block group">
           <div class="movie-poster">
             <img
               :src="getPosterUrl(movie.poster_path)"

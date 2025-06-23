@@ -8,13 +8,13 @@ export default defineConfig({
   site: 'https://iic3585.github.io/2025-1-s1-g9-t5',
   base: '/2025-1-s1-g9-t5/',
   output: 'static',
-  vite: {
-    css: {
-      preprocessorOptions: {
-        css: {
-          additionalData: `@import "./src/styles/global.css"; @import "./src/styles/components.css";`
-        }
-      }
-    }
-  }
+  // vite: {
+  //   css: {
+  //     preprocessorOptions: {
+  //       css: {
+  //         additionalData: `@import "./src/styles/global.css"; @import "./src/styles/components.css";`
+  //       }
+  //     }
+  //   }
+  // }
 }); 
