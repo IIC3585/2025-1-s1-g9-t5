@@ -3,7 +3,7 @@ import{s as n}from"./movies.BDkjVIyk.js";let l=null;const c=document.getElementB
                 No se encontraron películas para "${r}"
               </div>
             `:e.innerHTML=a.results.map(t=>`
-              <a href="/2025-1-s1-g9-t5/movies/${t.id}" class="block p-4 hover:bg-gray-700 transition-colors">
+              <a href={"/2025-1-s1-g9-t5/movies/${t.id}"} class="block p-4 hover:bg-gray-700 transition-colors">
                 <div class="flex items-center space-x-4">
                   <img
                     src="https://image.tmdb.org/t/p/w92${t.poster_path}"
