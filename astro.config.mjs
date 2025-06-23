@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   integrations: [vue(), react(), tailwind()],
-  site: 'https://iic3585.github.io/2025-1-s1-g9-t5/',
+  site: 'https://IIC3585.github.io/2025-1-s1-g9-t5/',
   base: '/2025-1-s1-g9-t5/',
   output: 'static',
   vite: {
