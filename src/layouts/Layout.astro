@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+import '../styles/components.css';
 interface Props {
   title: string;
 }
@@ -11,7 +13,7 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href=`${import.meta.env.BASE_URL}/favicon.svg` />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -19,7 +21,7 @@ const { title } = Astro.props;
     <header class="bg-black border-b border-gray-800">
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between h-16">
-          <a href=`${import.meta.env.BASE_URL}` class="flex items-center space-x-2">
+          <a href={`${import.meta.env.BASE_URL}`} class="flex items-center space-x-2">
             <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
             </svg>
@@ -27,11 +29,11 @@ const { title } = Astro.props;
           </a>
           
           <nav class="hidden md:flex items-center space-x-8">
-            <a href=`${import.meta.env.BASE_URL}` class="text-gray-300 hover:text-white">Inicio</a>
-            <a href=`${import.meta.env.BASE_URL}movies` class="text-gray-300 hover:text-white">Películas</a>
-            <a href=`${import.meta.env.BASE_URL}genres` class="text-gray-300 hover:text-white">Géneros</a>
-            <a href=`${import.meta.env.BASE_URL}history` class="text-gray-300 hover:text-white">Historial</a>
-            <a href=`${import.meta.env.BASE_URL}watchlist` class="text-gray-300 hover:text-white">Watchlist</a>
+            <a href={`${import.meta.env.BASE_URL}`} class="text-gray-300 hover:text-white">Inicio</a>
+            <a href={`${import.meta.env.BASE_URL}movies`} class="text-gray-300 hover:text-white">Películas</a>
+            <a href={`${import.meta.env.BASE_URL}genres`} class="text-gray-300 hover:text-white">Géneros</a>
+            <a href={`${import.meta.env.BASE_URL}history`} class="text-gray-300 hover:text-white">Historial</a>
+            <a href={`${import.meta.env.BASE_URL}watchlist`} class="text-gray-300 hover:text-white">Watchlist</a>
           </nav>
 
           <button class="md:hidden" id="mobile-menu-button">
@@ -45,11 +47,11 @@ const { title } = Astro.props;
       <!-- Mobile menu -->
       <div class="md:hidden hidden" id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          <a href=`${import.meta.env.BASE_URL}/` class="block px-3 py-2 text-gray-300 hover:text-white">Inicio</a>
-          <a href=`${import.meta.env.BASE_URL}/movies` class="block px-3 py-2 text-gray-300 hover:text-white">Películas</a>
-          <a href=`${import.meta.env.BASE_URL}/genres` class="block px-3 py-2 text-gray-300 hover:text-white">Géneros</a>
-          <a href=`${import.meta.env.BASE_URL}/history` class="block px-3 py-2 text-gray-300 hover:text-white">Historial</a>
-          <a href=`${import.meta.env.BASE_URL}/watchlist` class="block px-3 py-2 text-gray-300 hover:text-white">Watchlist</a>
+          <a href={`${import.meta.env.BASE_URL}`} class="block px-3 py-2 text-gray-300 hover:text-white">Inicio</a>
+          <a href={`${import.meta.env.BASE_URL}movies`} class="block px-3 py-2 text-gray-300 hover:text-white">Películas</a>
+          <a href={`${import.meta.env.BASE_URL}genres`} class="block px-3 py-2 text-gray-300 hover:text-white">Géneros</a>
+          <a href={`${import.meta.env.BASE_URL}history`} class="block px-3 py-2 text-gray-300 hover:text-white">Historial</a>
+          <a href={`${import.meta.env.BASE_URL}watchlist`} class="block px-3 py-2 text-gray-300 hover:text-white">Watchlist</a>
         </div>
       </div>
     </header>
